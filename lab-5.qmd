@@ -1,6 +1,8 @@
 ---
 title: "Lab 5 - Modelling I"
 categories: "Lab"
+format: "pdf"
+author: "Jessica St. Jean"
 ---
 
 # Introduction
@@ -42,6 +44,17 @@ d.  Write the estimated least squares regression line below using proper notatio
     ::: callout-tip
     If you need to type an equation using proper notation, type your answers in-between `$$` and `$$`. You may use `\hat{example}` to put a hat on a character.
     :::
+
+```{r}
+library(openintro)
+library(tidyverse)
+```
+
+a\.
+
+```{r}
+
+```
 
 ## Question 2
 
