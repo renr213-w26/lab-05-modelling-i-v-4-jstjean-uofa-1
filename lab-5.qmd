@@ -48,13 +48,46 @@ d.  Write the estimated least squares regression line below using proper notatio
 ```{r}
 library(openintro)
 library(tidyverse)
+library(ggplot2)
 ```
 
 a\.
 
 ```{r}
+births14_habitgiven <- births14 |>
+  filter(!is.na(habit))
+```
+
+b\.
+
+```{r}
+
+ggplot(births14_habitgiven, aes(x= habit, y= weight))+
+  geom_boxplot() +
+  labs(
+   title = "Infant Weight at Birth by Maternal Smoking Habit",
+    x = "Maternal Smoking Habit",
+    y = "Birth Weight (pounds)"
+  ) +
+  theme_minimal()
 
 ```
+
+**Comment:** The boxplot suggests that the babies born to nonsmoking mothers are typically heavier than babies born to smoking mothers. The range of the weight for the babies born to smoking mothers is also larger.
+
+c\.
+
+```{r}
+model <- lm(weight ~ habit, data = births14_habitgiven) 
+library(broom)
+tidy(model)
+```
+
+d\.
+
+$$
+\hat{weight} = 7.3 - 0.60 (smoker)
+$$
 
 ## Question 2
 
