@@ -99,6 +99,25 @@ c.  Interpret the intercept in the context of the data and the research question
 
 d.  Interpret the slope in the context of the data and the research question.
 
+a\.
+
+```{r}
+model_age <- lm(weight ~ mage, data = births14)
+tidy(model_age)
+```
+
+b\.
+
+**Comment:** It is based on the least squares method. This means that R is calculating the line to have the least total distance between the line and each point. The distance between the line and the point is called the residual.
+
+c\.
+
+**Comment:** In this case the intercept is when the mother's age is 0, which in the context of the research question is not meaningful because you cannot have a mother who is 0 years old. It is important for the statistics but not for the reasearch question.
+
+d\.
+
+The slope is the predicted change in the birth weight of infants for each year that the hypothetical mother is older. In this case the relationship suggested is that for every year the mother is older the weight of the infant would increase by 0.01lb which is a very weak positive relationship.
+
 # Part 2 - Parasites
 
 Parasites can cause infectious disease – but not all animals are affected by the same parasites. Some parasites are present in a multitude of species and others are confined to a single host. It is hypothesized that closely related hosts are more likely to share the same parasites. More specifically, it is thought that closely related hosts will live in similar environments and have similar genetic makeup that coincides with optimal conditions for the same parasite to flourish.
