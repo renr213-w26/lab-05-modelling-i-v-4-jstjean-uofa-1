@@ -154,6 +154,31 @@ c.  Visualize the relationship between the two variables.
 
 d.  Use the visualization to describe the relationship between the two variables.
 
+a\.
+
+```{r}
+parasites <- read.csv("data/parasites.csv")
+```
+
+b\.
+
+**Comment:** The response variable is parsim, because the research is trying to find the amount of parasites shared by certain species/characteristics.
+
+c\.
+
+```{r}
+ggplot(parasites, aes(x = divergence_time, y = parsim)) +
+  geom_point(alpha = 0.6) +
+  labs(
+    title = "Parasite Similarity vs. Evolutionary Divergence Time",
+    x = "Divergence Time (millions of years)",
+    y = "Parasite Similarity (proportion shared)"
+  ) +
+  theme_minimal()
+```
+
+d\. The plot suggests that there is a negative relationship, when the divergence time is longer the proportion of parasites shared goes down.
+
 ## Question 4
 
 Next, model this relationship.
@@ -165,6 +190,39 @@ b.  Interpret the slope and the intercept in the context of the data.
 c.  Recreate the visualization from Question 3, this time adding a regression line to the visualization.
 
 d.  What do you notice about the prediction (regression) line that may be strange, particularly for very large divergence times?
+
+a\.
+
+```{r}
+model_parasite <- lm(parsim ~ divergence_time, data = parasites)
+tidy(model_parasite)
+```
+
+$$
+\hat{parsim} = 0.38 - 0.001(divergencetime)
+$$
+
+b\.
+
+**Comment:** The slope is the change in the predicted proportion of parasites shared for every added 1 million years of divergence time. So every 1 million years that passes since two species diverged means that they share 0.1% less parasites. The intercept means that when the two species diverge they will share about 38% of their parasites, and this is meaningful in the context of the data because it is possible for species to have just diverged.
+
+c\.
+
+```{r}
+ggplot(parasites, aes(x = divergence_time, y = parsim)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Parasite Similarity vs. Evolutionary Divergence Time",
+    x = "Divergence Time (millions of years)",
+    y = "Parasite Similarity (proportion shared)"
+  ) +
+  theme_minimal()
+```
+
+d\.
+
+**Comment:** The regression line would suggest that from just above 70 million years or above that the parasite similarity would be below 0, which is not possible.
 
 ## Question 5
 
