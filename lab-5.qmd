@@ -460,6 +460,48 @@ b.  **Model fitting and interpretation:**
 
 c.  **Prediction:** Predict the GDP of a country in Asia where the average life expectancy is 70 years old.
 
+a\.
+
+```{r}
+ggplot(gapminder_07, aes(x = gdpPercap_log, y = lifeExp, color = continent)) +
+  geom_point(alpha = 0.6) +
+  labs(
+    title = "Life Expectancy vs Log GDP per Capita (2007)",
+    subtitle = "Colored by continent",
+    x = "Log GDP per Capita",
+    y = "Life Expectancy (years)",
+    color = "Continent"
+  ) +
+  theme_minimal()
+```
+
+**Comment:** They all look to have positive relationships but there are differences between continents, such as, Africa having more points clustered in the lower life expectancy and lower LogGDP, Europe and North and South America being clustered more in the higher life expectancy and higher LogGDP, and Asia having the most variability.
+
+b\.
+
+```{r}
+gapminder_07$continent <- relevel(gapminder_07$continent, ref = "Africa")
+
+model_Africa <- lm(gdpPercap_log ~ lifeExp + continent, data = gapminder_07)
+tidy(model_Africa)
+```
+
+**Comment:** In the original units the intercept GDP is 24.7 meaning that in Africa a life expectancy of 0 years old would predict the GDP of a country to be about \$25. In the original units the slope would be 1.081 meaning that the for each year of life expectancy added there would need to be an increase of 8.1% in the GDP.
+
+c\.
+
+```{r}
+new_data <- data.frame(
+  lifeExp = 70,
+  continent = "Asia"
+)
+
+pred_log <- predict(model_Africa, newdata = new_data)
+exp(pred_log)
+```
+
+**Comment:** The expected GDP would be about \$5,907.
+
 ## Question 10
 
 Communication is a critical yet often overlooked part of data science. When we engage with our audience and capture their interest, we can ultimately better communicate what we are trying to share.
