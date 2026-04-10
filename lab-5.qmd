@@ -389,6 +389,61 @@ d.  **Model evaluation:**
 
     -   Interpret R-squared in the context of the data and the research question.
 
+a\.
+
+```{r}
+ library(gapminder)
+gapminder_07 <- gapminder |>
+  filter(year == 2007)
+```
+
+b\.
+
+```{r}
+ggplot(gapminder_07, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.6) +
+  labs(
+    title = "Life Expectancy vs GDP per Capita (2007)",
+    x = "GDP per Capita (USD, inflation-adjusted)",
+    y = "Life Expectancy (years)"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+gapminder_07 <- gapminder_07 %>%
+  mutate(gdpPercap_log = log(gdpPercap))
+ggplot(gapminder_07, aes(x = gdpPercap_log, y = lifeExp)) +
+  geom_point(alpha = 0.6) +
+  labs(
+    title = "Life Expectancy vs Log GDP per Capita (2007)",
+    x = "Log GDP per Capita",
+    y = "Life Expectancy (years)"
+  ) +
+  theme_minimal()
+```
+
+**Comment:** Life expectancy vs GDP is a positive relationship that is curved, higher GDP only increases life expectancy to a point and then begins to level off. Life expectancy vs LogGDP is also a postive relationship but but is more evenly spread and more in a line. The LogGDP would be better suited for a linear regression because it makes the relationship closer to a straight line.
+
+c\.
+
+```{r}
+model_GDP <- lm(gdpPercap_log ~ lifeExp, data = gapminder_07)
+tidy(model_GDP)
+```
+
+d\.
+
+```{r}
+glance(model_GDP)$r.squared
+```
+
+```{r}
+cor(gapminder_07$lifeExp, gapminder_07$gdpPercap_log)^2
+```
+
+**Comment:** In the context of this study the R\^2 value means that about 65% of the variation in the log GDP can be explained by changes in life expectancy. This means there is a fairly strong relationship between the two variables.
+
 ## Question 9
 
 Next, we want to examine if the relationship between GDP and life expectancy that we observed in the previous exercise holds across all continents in our data. We’ll continue to work with logged GDP (`gdpPercap_log`) and data from 2007.
