@@ -222,7 +222,7 @@ ggplot(parasites, aes(x = divergence_time, y = parsim)) +
 
 d\.
 
-**Comment:** The regression line would suggest that from just above 70 million years or above that the parasite similarity would be below 0, which is not possible.
+**Comment:** The regression line would suggest that from any time longer than 60 million years ago that the parasite similarity would be below 0, which is not possible.
 
 ## Question 5
 
