@@ -238,6 +238,31 @@ b.  Then, visualize the relationship between divergence_time and `transformed_pa
 
 c.  Write a 1-2 sentence description of what you observe in the visualization.
 
+a\.
+
+```{r}
+parasites <- parasites |>
+  mutate(transformed_parsim = log(parsim / (1 - parsim)))
+```
+
+b\.
+
+```{r}
+ggplot(parasites, aes(x = divergence_time, y = transformed_parsim)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Transformed Parasite Similarity vs. Divergence Time",
+    x = "Divergence Time (millions of years)",
+    y = "Log(Parasite Similarity)"
+  ) +
+  theme_minimal()
+```
+
+c\.
+
+**Comment:** The relationship looks linear and is still negative.
+
 ## Question 6
 
 *Which variable is the strongest individual predictor of parasite similarity between species?*
