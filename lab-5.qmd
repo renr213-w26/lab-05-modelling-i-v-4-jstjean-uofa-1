@@ -281,6 +281,35 @@ a.  Report the slopes for each of these models. Use proper notation.
 
 b.  To answer the question of interest, would it be useful to compare the slopes in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?
 
+    a\.
+
+    ```{r}
+    dt_model   <- lm(transformed_parsim ~ divergence_time, data = parasites)
+    dist_model <- lm(transformed_parsim ~ distance, data = parasites)
+    BM_model   <- lm(transformed_parsim ~ BMdiff, data = parasites)
+    prec_model <- lm(transformed_parsim ~ precdiff, data = parasites)
+    ```
+
+$$
+\hat{βdt} ​=-0.09
+$$
+
+$$
+\hat{βd} =-0.00002
+$$
+
+$$
+\hat{βBM} =-5.04
+$$
+
+$$
+\hat{βprec} =-0.006
+$$
+
+b\.
+
+**Comment:** No it would not be useful because all of the predictor variables are in different units, so their scales are all different.
+
 ## Question 7
 
 Now, what if we calculated $R^2$ to help answer our question? To compare the explanatory power of each individual predictor, we will look at $R^2$ between the models. $R^2$ is a measure of how much of the variability in the response variable is explained by the model.
