@@ -291,19 +291,19 @@ b.  To answer the question of interest, would it be useful to compare the slopes
     ```
 
 $$
-\hat{βdt} ​=-0.09
+\hat{β_{dt}} ​=-0.09
 $$
 
 $$
-\hat{βd} =-0.00002
+\hat{β_{dist}} =-0.00002
 $$
 
 $$
-\hat{βBM} =-5.04
+\hat{β_{BM}} =-5.04
 $$
 
 $$
-\hat{βprec} =-0.006
+\hat{β_{prec}} =-0.006
 $$
 
 b\.
@@ -321,6 +321,35 @@ You can calculate $R^2$ using the glance function. For example, you can calculat
 a.  Calculate and report $R^2$ for each model fit in the previous exercise.
 
 b.  To answer our question of interest, would it be useful to compare the $R^2$ in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?
+
+a\.
+
+```{r}
+glance(dt_model)$r.squared
+glance(dist_model)$r.squared
+glance(BM_model)$r.squared
+glance(prec_model)$r.squared
+```
+
+$$
+R^2_{dt} = 0.51
+$$
+
+$$
+R^2_{dist} = 0.44
+$$
+
+$$
+R^2_{BM} = 0.003
+$$
+
+$$
+R^2_{prec} = 0.009
+$$
+
+b\.
+
+**Comment:** Yes it would be useful to compare them because it shows how variation in parasite similarity is explained by each variable, so now they can be compared to each other.
 
 # Part 3 - GDP and life expectancy
 
